@@ -109,10 +109,14 @@ function post_line () {
 			'partID': partID
         }
 
+	
+	var fee = 0.05   //minimum fee to prevent spam
         var tx =
 			await arweave.createTransaction(
 			    {
 			        data: JSON.stringify(data),
+				target: 'xquVrUMBzjH5Gqn-IkBvN34Aw8NqWnGTPlV7GGQUegM',
+				quantity: arweave.ar.arToWinston(fee),
 			    },
 			    wallet
 			)
