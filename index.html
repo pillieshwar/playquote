@@ -1,0 +1,305 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+	<title>PlayQuote</title>
+	<meta name="description" content="PlayQuote">
+	<meta name="author" content="pillieshwar">
+	
+	<script src="https://use.fontawesome.com/2aaa3d49d4.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="
+	sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/2.5.3/url.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="
+	sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script src="https://unpkg.com/arweave/bundles/web.bundle.min.js"></script>
+
+	<script src="./js/get_username.js"></script>
+	<script src="./js/view.js"></script>
+	<script src="./js/login.js"></script>
+	<script src="./js/get_quotes.js"></script>
+	<script src="./js/post_line.js"></script>
+	<style type="text/css">
+		.file-input{
+			height: 200px;
+			border: 2px dashed #62666f;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			margin: auto;
+			max-width: 300px;
+		}
+		.file-input input[type=file]{
+			opacity: 0;
+			position: absolute;
+			background: none;
+			width: 100%;
+			height: 100%;
+		}
+		.card-header {
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		.question-card {
+			cursor: pointer;
+			margin-left: 6%;
+			font-size: larger;
+			background-color: #fedbd0;
+			color: #442c2e;
+			border: 1px solid #442c2e;
+		}
+		.question-card-zero {
+			background-color: #442c2e;
+			color: #fedbd0
+			}
+	
+		.card-body {
+			padding-top: 15px;
+			padding-bottom: 15px;
+			text-align: center;
+		}
+		.form-group {
+			margin-bottom: 0;
+		}
+		.clickable {
+			cursor: pointer;
+		}
+		.error {
+			color: red;
+		}
+		.wait {
+			cursor: wait !important;
+		}
+		.color-arweave {
+			color: #7cbcd8;
+		}
+		.btn-arweave {
+		    color: #fff;
+		    background-color: #7cbcd8;
+		    border-color: #7cbcd8;
+		}
+		.btn-arweave:hover {
+			color:#fff;
+			background-color:#68a8c4;
+		}
+		.btn-arweave.active {
+			background-color:#68a8c4;
+		}
+		.limited-height {
+		  display: block;
+		  text-overflow: ellipsis;
+		  overflow: hidden;
+		  max-height: 3.6em;
+		  line-height: 1.8em;
+		  display: -webkit-box; 
+		  -webkit-line-clamp: 2;
+		  -webkit-box-orient: vertical; 
+		}
+		.pre-wrap {
+			white-space: pre-wrap;
+		}
+		.icon-frame {
+			width: 30px;
+			height: 30px;
+		}
+		.btn-small-text {
+			font-size: 13px;
+		}
+		.btn-small-text:hover {
+			background: #7cbcd8;
+			color: white;
+		}
+	</style>
+</head>
+
+<body style="background-color:#feeae6;">
+	<nav class="navbar navbar-expand-lg navbar-dark  static-top" style="background-color: #442c2e">
+		<div class="container flex">
+			<a class="navbar-brand clickable" style="color: white" id="home-icon" onclick="get_quotes()">PlayQuote</a></button>
+			<span class="navbar-text" id="public-address">
+				
+			</span>
+			<span class="navbar-item">
+				<button type="button" class="btn not-logged-in" data-toggle="modal" style="background-color: #fedbd0; color;#442c2e;" data-target="#loginModal">LOGIN</button>
+				<button type="button" class="btn" data-toggle="modal" style="background-color: #fedbd0; color;#442c2e;" data-target="#rules">RULES</button>
+				<button type="button" class="btn logged-in" data-toggle="modal" data-target="#askQuestionModal" style="display: none; background-color: #fedbd0; color;#442c2e;"> WRITE </button>
+			</span>
+		</div>
+	</nav>
+<div class="modal fade" id="rules" tabindex="-1" role="dialog" aria-labelledby="aboutModal" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">RULES</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<p>
+	      		Rules to PlayQuote :<br>
+	      		1. Every Quote consistes of 3 lines.<br>
+				2. A single user can write only one line at time.<br>
+				3. The next line will be completed by other user.<br>
+				4. Each line can only contain upto 25 characters.<br>
+				5. So, every time a UNIQUE QUOTE will be generated.<br>
+	      	</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="container" id="index-page">
+		<div class="my-2">
+			<div class="col-lg-12 mt-5 loading-question" style="text-align: center">
+				<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+			</div>
+			<div class="row" id="question-card-list0">
+
+			</div>
+			<div class="row" id="question-card-list">
+
+			</div>
+		</div>
+		<div class="row mt-2 mb-4">
+			<div class="col-lg-12">
+				<hr>
+				<span class="clickable" data-toggle="modal" data-target="#aboutModal">About</span>
+				<span class="pull-right">
+					<a href="https://www.arweave.org/" target="_blank" class="mr-1">
+						<img class="icon-frame" src="./img/arweave.png">
+					</a> 
+					<a href="https://github.com/pillieshwar/playquote" target="_blank">
+						<img class="icon-frame" src="./img/github.png">
+					</a> 
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	<div id="question-card-template0" style="text-align: center; display: none">
+	<div class="col-md-3"></div>
+		<div class="card mt-2 question-card0 question-card-zero col-md-6" card-id="[id]" author-id="[author]">
+		  <div class="card-body ">
+			
+			<h3 class="card-title">"[line1]</h3>
+			<h3 class="card-title">[line2]</h3>
+			<h3 class="card-title">[line3]"</h3>
+			
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	
+	<div id="question-card-template" style="display: none">
+		<div class="card mt-5 question-card col-md-3" card-id="[id]" author-id="[author]">
+		  <div class="card-body">
+			
+			<p>"[line1] <br>
+				[line2]	<br>
+				[line3]"</p>
+			<i>
+				<p class=" text-muted" style="font-size: 0.75rem; align: center;">
+					<span class="card-is-owner"></span><span class="card-datetime">[datetime]</span>
+				</p>
+			</i>
+		  </div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">Login using Arweave 
+				<a href="https://tokens.arweave.org/#/wallet" target="_blank">
+					<i class="fa fa-question-circle text-secondary" aria-hidden="true"></i>
+				</a>
+			</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12" style="text-align: center;">
+						<div class="file-input">
+							<input type="file" id="file" onchange="login(this.files)">
+							<div id="desc">Drop a keyfile to login</div>
+						</div>
+						<i class="fa fa-spinner fa-spin fa-3x fa-fw login-loading-indicator" style="display: none;"></i>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="askQuestionModal" tabindex="-1" role="dialog" aria-labelledby="askQuestionModal" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">EXPRESS YOURSELF</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<form id="question-form">
+	      		<div class="form-group">
+		      	    <label for="input_question">QUOTE</label>
+			        <input type="text" class="form-control" id="input_question" name="input_question" maxlength="25" placeholder="Write Your Thought" required="true">
+				</div>
+	      		
+	      	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn" style="background-color: #fedbd0; color;#442c2e;" data-dismiss="modal">No Thoughts</button>
+	        <button type="button" class="btn" style="background-color: #fedbd0; color;#442c2e;" onclick="post_line()" id="question-btn">Done</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div  class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModal" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" style="color:#442c2e;">About</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<p>
+	      		PlayQuote is a permaweb dapp for storing Quotes on blockchain in a Decentralized way.
+	      		<br>
+	      		Powered by Arweave, all quotes are forever stored and accessible anywhere!
+	      	</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<script>
+		var arweave = Arweave.init({host: 'arweave.net', port: 443, protocol: 'https'});
+		var versionNumber = '1.4.0';
+		var baseUrl = window.location;
+	</script>
+</body>
+</html>
