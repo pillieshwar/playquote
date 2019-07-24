@@ -8,3 +8,6 @@ Rules to PlayQuote :
 3. The next line will be completed by other user.
 4. Each line can only contain upto 25 characters.
 5. So, every time a UNIQUE QUOTE will be generated, with each line being written by a different user.
+
+
+Visit : https://arweave.net/x0805Fzh-65AZjOaZzEciSexOEe7d_Gw3tCXiCFilkA
