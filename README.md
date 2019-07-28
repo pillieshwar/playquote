@@ -10,4 +10,4 @@ Rules to PlayQuote :
 5. So, every time a UNIQUE QUOTE will be generated, with each line being written by a different user.
 
 
-Visit : https://arweave.net/x0805Fzh-65AZjOaZzEciSexOEe7d_Gw3tCXiCFilkA
+Visit : https://playquote.fun/
